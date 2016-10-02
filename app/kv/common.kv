@@ -1,0 +1,15 @@
+<Label>
+    font_size: '25dp'
+    text_size: self.size
+    halign: 'left'
+    valign: 'middle'
+
+<Button>
+    font_size: '25dp'
+    halign: 'center'
+
+<BackButton@Button>:
+    text: 'Back'
+    on_release: app.history_back()
+    size_hint_y: None
+    height: '48dp'

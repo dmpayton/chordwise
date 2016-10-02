@@ -1,0 +1,29 @@
+root,name,long_name,position,fingers
+
+A,A,A Major,x02220,--123-
+A,Am,A Minor,x02210,--231-
+A,A5,A5 (Power chord),x022xx,--23--
+
+B,B,B Major,x2444x,-1333-
+B,Bm,B Minor,x24432,-13421
+B,B5,B5 (Power chord),x244xx,-134--
+
+C,C,C Major,x32010,-32-1-
+C,Cm,C Minor,x35543,-13421
+C,C5,C5 (Power chord),x355xx,-134--
+
+D,D,D Major,xx0232,---132
+D,Dm,D Minor,xx0231,---231
+D,D5,D5 (Power chord),xx023x,---13-
+
+E,E,E Major,022100,-231--
+E,Em,E Minor,022000,-23---
+E,E5,E5 (Power chord),022xxx,-23---
+
+F,F,F Major,x03211,--3211
+F,Fm,F Minor,133111,134111
+F,F5,F5 (Power chord),133xxx,134---
+
+G,G,G Major,320033,21--34
+G,Gm,G Minor,355333,134111
+G,G5,G5 (Power chord),355xxx,134---

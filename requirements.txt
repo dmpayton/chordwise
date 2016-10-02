@@ -1,0 +1,3 @@
+pip install colorama appdirs jinja2 sh six
+pip install Cython
+pip install kivy
