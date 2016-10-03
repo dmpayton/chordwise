@@ -1,0 +1,20 @@
+#: import asset chordwise.utils.asset
+
+<MenuScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: (1, 1)
+        padding: '48dp'
+        spacing: '48dp'
+
+        Image:
+            id: logo
+            source: asset('img/chordwise.png')
+
+        Button:
+            text: 'Chord list'
+            on_release: app.route = '/chords'
+
+        Button:
+            text: 'Practice!'
+            on_release: app.route = '/practice'

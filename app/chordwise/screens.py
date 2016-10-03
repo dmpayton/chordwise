@@ -1,4 +1,7 @@
+from kivy import properties
 from kivy.uix.screenmanager import Screen
+
+from .utils import asset
 
 
 class MenuScreen(Screen):
@@ -10,10 +13,17 @@ class ChordListScreen(Screen):
 
 
 class ChordDetailScreen(Screen):
-    pass
+    chord = properties.StringProperty()
+
+    def __init__(self, **kwargs):
+        super(ChordDetailScreen, self).__init__(**kwargs)
+        self.ids['chord'].source = asset('chords/{0}.png'.format(self.chord))
+
+    # def on_chord(self, instance, value):
+    #     self.ids['chord'].source = asset('chord/{0}.png'.format(self.chord))
 
 
-class ChordPracticeScreen(Screen):
+class PracticeScreen(Screen):
     pass
 
 

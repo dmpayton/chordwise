@@ -1,0 +1,21 @@
+<ChordListScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Header
+
+        ChordSection:
+            section: 'major'
+        ChordSection:
+            section: 'minor'
+        ChordSection:
+            section: '5'
+
+<ChordDetailScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        Header
+        Image:
+            id: chord
+            allow_stretch: True
+            keep_ratio: True

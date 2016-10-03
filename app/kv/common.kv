@@ -1,15 +1,14 @@
-<Label>
+<Label>:
+    color: (0, 0, 0, 1)
+    font_name: 'Roboto'
     font_size: '25dp'
     text_size: self.size
     halign: 'left'
     valign: 'middle'
 
-<Button>
+<Button>:
+    background_normal: ''
+    background_color: (0, .4, .6, 1)
+    color: (1, 1, 1, 1)
     font_size: '25dp'
     halign: 'center'
-
-<BackButton@Button>:
-    text: 'Back'
-    on_release: app.history_back()
-    size_hint_y: None
-    height: '48dp'

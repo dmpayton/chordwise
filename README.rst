@@ -21,17 +21,12 @@ Metro-style main menu::
 
 
 Sortable chord list:
-    root note (A, B, C, displayed by difficulty)
-    difficulty (1, 2, 3, sorted by root note)
+    type (Major, Minor, 5 (Power), ...), sort: root
+    root: (A, B, C, ...) sort: type
 
-A
-    Static
-        Major
-        Minor
-        ...
-    Movable
-        Major
-        Minor
-        ...
-B
-        ...
+Major
+    A B C D E F G
+Minor
+    Am Bm Cm Dm Em Fm Gm
+5 (Power)
+    A5 B5 C5 D5 E5 F5 G5

@@ -6,10 +6,12 @@ from kivy.garden.router import AppRouter
 
 import chordwise.conf
 import chordwise.router
+import chordwise.uix
 
 # Load our kv files.
-for filename in os.listdir(chordwise.conf.KV_DIR):
-    Builder.load_file(os.path.join(chordwise.conf.KV_DIR, filename))
+for root, dirs, files in os.walk(chordwise.conf.KV_DIR):
+    for filename in files:
+        Builder.load_file(os.path.join(root, filename))
 
 
 class ChordwiseApp(AppRouter):

@@ -17,13 +17,13 @@ class MainRouter(Router):
     def chord_list(self):
         return screens.ChordListScreen()
 
-    @route('/chords/')
-    def chord_detail(self):
-        return screens.ChordDetailScreen()
+    @route('/chords/<path:chord>')
+    def chord_detail(self, chord):
+        return screens.ChordDetailScreen(chord=chord.strip('/'))
 
-    @route('/chords/practice')
-    def chord_practice(self):
-        return screens.ChordPracticeScreen()
+    @route('/practice')
+    def practice(self):
+        return screens.PracticeScreen()
 
     @route('/scales')
     def scales(self):

@@ -1,0 +1,24 @@
+#: import asset chordwise.utils.asset
+
+<Header@StackLayout>:
+    size_hint_y: None
+
+    canvas.before:
+        Color:
+            rgb: (0, 1, 0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Button:
+        text: '<'
+        on_release: app.history_back()
+        size_hint: None, None
+
+    Image:
+        id: logo
+        source: asset('img/chordwise.png')
+        size_hint: None, None
+        allow_stretch: True
+        keep_ratio: True
+        color: (1,0,0,1)
