@@ -11,10 +11,15 @@
             id: logo
             source: asset('img/chordwise.png')
 
-        Button:
-            text: 'Chord list'
-            on_release: app.route = '/chords'
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: (1, 1)
+            spacing: '48dp'
 
-        Button:
-            text: 'Practice!'
-            on_release: app.route = '/practice'
+            Button:
+                text: 'Chord list'
+                on_release: app.route = '/chords'
+
+            Button:
+                text: 'Practice!'
+                on_release: app.route = '/practice'

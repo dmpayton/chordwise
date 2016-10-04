@@ -6,7 +6,7 @@ class Chord(object):
         self.name = name
         self.type = type
 
-    def image(self):
+    def image_path(self):
         return asset('chords/{0}.png'.format(self.name))
 
 

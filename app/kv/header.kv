@@ -2,23 +2,17 @@
 
 <Header@StackLayout>:
     size_hint_y: None
-
-    canvas.before:
-        Color:
-            rgb: (0, 1, 0, 1)
-        Rectangle:
-            pos: self.pos
-            size: self.size
+    height: '70dp'
 
     Button:
         text: '<'
-        on_release: app.history_back()
+        size: self.parent.height, self.parent.height
         size_hint: None, None
+        on_release: app.history_back()
 
     Image:
         id: logo
         source: asset('img/chordwise.png')
         size_hint: None, None
-        allow_stretch: True
-        keep_ratio: True
-        color: (1,0,0,1)
+        height: self.parent.height
+        width: self.texture.width / (self.texture.height / self.parent.height)
