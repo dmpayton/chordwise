@@ -7,7 +7,10 @@ from . import screens
 class MainRouter(Router):
     def __init__(self, *args, **kwargs):
         super(MainRouter, self).__init__(*args, **kwargs)
-        self.ids.screenmanager.transition = FadeTransition(clearcolor=(1,1,1,1))
+        self.ids.screenmanager.transition = FadeTransition(
+            clearcolor=(1,1,1,1),
+            duration=.1
+        )
 
     @route('/')
     def index(self):
