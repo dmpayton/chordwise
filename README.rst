@@ -1,6 +1,4 @@
-=========
-Chordwise
-=========
+.. image:: app/assets/img/chordwise.png
 
 Practice your guitar chords.
 
