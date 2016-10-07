@@ -1,5 +1,59 @@
+#: import Chord chordwise.uix.chord.Chord
+#: import asset chordwise.utils.asset
+
 <PracticeScreen>:
     BoxLayout:
         orientation: 'vertical'
         Header
-        GridLayout:
+        BoxLayout:
+            orientation: 'vertical'
+            padding: '20dp'
+
+            Chord:
+                id: 'current'
+                width: self.parent.width
+                chord: 'A'
+            Label:
+                color: (.2, .2, .2, 1)
+                halign: 'right'
+                height: '60dp'
+                size_hint_y: None
+                text: '4/4, 60BPM'
+                text_size: self.size
+
+        BoxLayout:
+            id: 'playlist'
+            orientation: 'horizontal'
+            size_hint_y: .2
+            padding: '20dp'
+
+            canvas.before:
+                Color:
+                    rgb: (.7, .7, .7, 1)
+                Rectangle:
+                    pos: self.x, (self.y + self.height)
+                    size: self.width, 1
+
+            Chord:
+                id: 'previous-2'
+                chord: 'A'
+                opacity: .4
+
+            Chord:
+                id: 'previous-1'
+                chord: 'Dm'
+                opacity: .4
+
+            Chord:
+                id: 'current'
+                chord: 'A'
+
+            Chord:
+                id: 'future-1'
+                chord: 'E'
+                opacity: .4
+
+            Chord:
+                id: 'future-2'
+                chord: 'D'
+                opacity: .4

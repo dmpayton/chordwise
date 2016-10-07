@@ -10,6 +10,8 @@ from kivy.uix.image import Image
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.stacklayout import StackLayout
 
+from .behaviors import BorderBehavior
+from .chord import Chord
 from ..utils import asset
 
 chords = OrderedDict((
@@ -28,15 +30,26 @@ chords = OrderedDict((
 ))
 
 
-class ChordThumb(ButtonBehavior, Image):
-    chord = properties.StringProperty('')
-
-    def on_chord(self, instance, value):
-        self.source = asset('chords/{0}.png'.format(self.chord))
+class ChordThumb(ButtonBehavior, BorderBehavior, Chord):
+    active = properties.BooleanProperty(False)
 
     def on_release(self):
-        app = App.get_running_app()
-        app.route = '/chords/{0}'.format(self.chord)
+        self.active = not self.active
+        print('on_release')
+
+        # app = App.get_running_app()
+        # app.route = '/chords/{0}'.format(self.chord)
+
+    def on_active(self, instance, value):
+        (self.activate if self.active else self.deactivate)()
+
+    def activate(self):
+        self.borders = (5, 'solid', (0, 0, 0, 1))
+        print('activate()')
+
+    def deactivate(self):
+        self.borders = (0, 'solid', (0, 0, 0, 1))
+        print('deactivate()')
 
 
 class ChordSection(GridLayout):
@@ -62,7 +75,11 @@ class ChordList(ScrollView):
         sections = GridLayout(cols=1, size_hint_y=1)
         sections.bind(minimum_height=sections.setter('height'))
 
-        for key in chords.keys():
-            sections.add_widget(ChordSection(section=key))
+        for x in range(2):
+            for key in chords.keys():
+                sections.add_widget(ChordSection(
+                    id='section-{0}'.format(key),
+                    section=key,
+                ))
 
         self.add_widget(sections)

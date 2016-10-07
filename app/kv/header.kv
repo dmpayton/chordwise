@@ -1,18 +1,59 @@
+#: import ButtonBehavior kivy.uix.behaviors.ButtonBehavior
 #: import asset chordwise.utils.asset
 
 <Header@StackLayout>:
-    size_hint_y: None
     height: '70dp'
+    size_hint_y: None
+    pos_hint: {'top': 1}
 
-    Button:
-        text: '<'
-        size: self.parent.height, self.parent.height
-        size_hint: None, None
-        on_release: app.history_back()
+    # Background
+    canvas.before:
+        Color:
+            rgb: (.9, .9, .9, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
-    Image:
-        id: logo
-        source: asset('img/chordwise.png')
-        size_hint: None, None
-        height: self.parent.height
-        width: self.texture.width / (self.texture.height / self.parent.height)
+    # Bottom border
+    canvas.after:
+        Color:
+            rgb: (.3, .3, .3, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.width, 1
+
+    Logo:
+        pos_hint: {'left': 1}
+
+    BoxLayout:
+        orientation: 'horizontal'
+        pos_hint: {'right': 1}
+        size_hint_x: None
+
+        NavButton:
+            source: asset('img/nav/chord.png')
+            on_release: app.route = '/chords'
+
+        NavButton:
+            source: asset('img/nav/metronome.png')
+            on_release: app.route = '/practice'
+
+        NavButton:
+            source: asset('img/nav/settings.png')
+            on_release: app.route = '/settings'
+
+
+<Logo@ButtonBehavior+Image>:
+    id: logo
+    color: (.9, .9, .9, 1)
+    source: asset('img/chordwise.png')
+    size_hint: None, None
+    height: self.parent.height
+    width: self.texture.width / (self.texture.height / self.parent.height)
+    on_release: app.route = '/'
+
+
+<NavButton@ButtonBehavior+Image>:
+    color: (.9, .9, .9, 1)
+    height: self.parent.height
+    size_hint: (None, None)

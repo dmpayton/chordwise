@@ -17,10 +17,7 @@ class ChordDetailScreen(Screen):
 
     def __init__(self, **kwargs):
         super(ChordDetailScreen, self).__init__(**kwargs)
-        self.ids['chord'].source = asset('chords/{0}.png'.format(self.chord))
-
-    # def on_chord(self, instance, value):
-    #     self.ids['chord'].source = asset('chord/{0}.png'.format(self.chord))
+        self.ids['chord'].chord = self.chord
 
 
 class PracticeScreen(Screen):

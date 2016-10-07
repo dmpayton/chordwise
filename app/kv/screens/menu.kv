@@ -1,9 +1,10 @@
+#: import MenuButton chordwise.uix.menu.MenuButton
 #: import asset chordwise.utils.asset
+
 
 <MenuScreen>:
     BoxLayout:
         orientation: 'vertical'
-        size_hint: (1, 1)
         padding: '48dp'
         spacing: '48dp'
 
@@ -11,15 +12,39 @@
             id: logo
             source: asset('img/chordwise.png')
 
-        BoxLayout:
-            orientation: 'horizontal'
-            size_hint: (1, 1)
-            spacing: '48dp'
+        MenuButton:
+            icon: asset('img/nav/chord.png')
+            text: 'Chord list'
+            on_release: app.route = '/chords'
 
-            Button:
-                text: 'Chord list'
-                on_release: app.route = '/chords'
+        MenuButton:
+            icon: asset('img/nav/metronome.png')
+            text: 'Practice'
+            on_release: app.route = '/practice'
 
-            Button:
-                text: 'Practice!'
-                on_release: app.route = '/practice'
+        MenuButton:
+            icon: asset('img/nav/settings.png')
+            text: 'Settings'
+            on_release: app.route = '/settings'
+
+
+<MenuButton>:
+    halign: 'left'
+
+    StackLayout:
+        orientation: 'lr-tb'
+        pos: self.parent.pos
+        size: self.parent.size
+        padding: '48dp'
+        spacing: '48dp'
+
+        Image:
+            id: icon
+            color: root.background_color
+            size_hint_x: None
+
+        Label:
+            id: text
+            color: (1, 1, 1, 1)
+            size_hint_x: None
+            text_size: self.size
