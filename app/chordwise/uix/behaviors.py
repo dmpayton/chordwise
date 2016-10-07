@@ -4,121 +4,86 @@ from kivy.uix.widget import Widget
 
 
 class BorderBehavior(Widget):
-    borders = properties.ObjectProperty(None)
-    border_origin_x = properties.NumericProperty(0.)
-    border_origin_y = properties.NumericProperty(0.)
-    border_origin = properties.ReferenceListProperty(border_origin_x, border_origin_y)
+    DEFAULT_WIDTH = 1
+    DEFAULT_STYLE = 'solid'
+    DEFAULT_COLOR = (0, 0, 0, 0)
 
-    left_border_points = []
-    top_border_points = []
-    right_border_points = []
-    bottom_border_points = []
+    border = properties.ListProperty([DEFAULT_WIDTH, DEFAULT_STYLE, DEFAULT_COLOR])
 
-    CAP = 'square'
-    JOINT = 'none'
+    cap = 'square'
+    joint = 'miter'
 
-    dash_styles = {
-        'dashed':
-        {
+    styles = {
+        'dashed': {
             'dash_length': 10,
             'dash_offset': 5
         },
-        'dotted':
-        {
+        'dotted': {
             'dash_length': 1,
             'dash_offset': 1
         },
-        'solid':
-        {
+        'solid': {
             'dash_length': 1,
             'dash_offset': 0
         }
     }
 
-    def draw_border(self):
-        line_kwargs = {
+    def __init__(self, **kwargs):
+        self._borders = {}
+        super(BorderBehavior, self).__init__(**kwargs)
+
+        width, style, color = self.border
+        kwargs = {
             'points': [],
-            'width': self.line_width,
-            'cap': self.CAP,
-            'joint': self.JOINT,
-            'dash_length': self.cur_dash_style['dash_length'],
-            'dash_offset': self.cur_dash_style['dash_offset']
+            'close': True,
+            'width': width,
+            'cap': self.cap,
+            'joint': self.joint,
+            'dash_length': self.styles[style]['dash_length'],
+            'dash_offset': self.styles[style]['dash_offset'],
         }
 
         with self.canvas.after:
-            self.border_color = Color(*self.line_color)
-            # left border
-            self.border_left = Line(**line_kwargs)
+            self._color = Color(*color)
+            self._border = Line(**kwargs)
 
-            # top border
-            self.border_top = Line(**line_kwargs)
-
-            # right border
-            self.border_right = Line(**line_kwargs)
-
-            # bottom border
-            self.border_bottom = Line(**line_kwargs)
-
-    def update_borders(self):
-        if hasattr(self, 'border_left'):
-            # test for one border is enough so we know that the borders are
-            # already drawn
-            width = self.line_width
-            dbl_width = 2 * width
-
-            self.border_left.points = [
-                self.border_origin_x,
-                self.border_origin_y,
-                self.border_origin_x,
-                self.border_origin_y +
-                self.size[1] - dbl_width
-            ]
-
-            self.border_top.points = [
-                self.border_origin_x,
-                self.border_origin_y + self.size[1] - dbl_width,
-                self.border_origin_x + self.size[0] - dbl_width,
-                self.border_origin_y + self.size[1] - dbl_width
-            ]
-
-            self.border_right.points = [
-                self.border_origin_x + self.size[0] - dbl_width,
-                self.border_origin_y + self.size[1] - dbl_width,
-                self.border_origin_x + self.size[0] - dbl_width,
-                self.border_origin_y
-            ]
-
-            self.border_bottom.points = [
-                self.border_origin_x + self.size[0] - dbl_width,
-                self.border_origin_y,
-                self.border_origin_x,
-                self.border_origin_y
-            ]
-
-    def set_border_origin(self):
-        self.border_origin_x = self.pos[0] + self.line_width
-        self.border_origin_y = self.pos[1] + self.line_width
-
-    def on_border_origin(self, instance, value):
-        # print(self.border_origin, "border origin")
-        self.update_borders()
+    def on_border(self, instance, value):
+        self.update_border()
 
     def on_size(self, instance, value):
-        # not sure if it's really needed, but if size is changed
-        # programatically the border have to be updated
-        # --> needs further testing
-        if hasattr(self, 'line_width'):
-            self.set_border_origin()
-            self.pos = self.border_origin
+        self.update_border()
 
     def on_pos(self, instance, value):
-        # print instance, value, "pos changed"
-        if hasattr(self, 'line_width'):
-            self.set_border_origin()
+        self.update_border()
 
-    def on_borders(self, instance, value):
-        self.line_width, self.line_style, self.line_color = value
-        self.cur_dash_style = self.dash_styles[self.line_style]
-        # print self.cur_dash_style, "dash_style selected"
-        self.set_border_origin()
-        self.draw_border()
+    def update_border(self):
+        if not hasattr(self, '_border'):
+            return
+
+        width, style, color = self.border
+
+        self._color.rgba = color
+        self._border.dash_length = self.styles[style]['dash_length']
+        self._border.dash_offset = self.styles[style]['dash_offset']
+        self._border.width = width
+
+        origin_x = self.x + width
+        origin_y = self.y + width
+
+        self._border.points = [
+            # bottom left
+            origin_x,
+            origin_y,
+
+            # bottom right
+            origin_x + self.width,
+            origin_y,
+
+            # top right
+            origin_x + self.width,
+            origin_y + self.height,
+
+            # top left
+            origin_x,
+            origin_y + self.height,
+        ]

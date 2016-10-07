@@ -27,33 +27,45 @@
             size_hint_y: .2
             padding: '20dp'
 
+            # Background
             canvas.before:
                 Color:
-                    rgb: (.7, .7, .7, 1)
+                    rgb: (.95, .95, .95, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            # Bottom border
+            canvas.after:
+                Color:
+                    rgb: (.8, .8, .8, 1)
                 Rectangle:
                     pos: self.x, (self.y + self.height)
                     size: self.width, 1
 
-            Chord:
+            ChordItem:
                 id: 'previous-2'
                 chord: 'A'
                 opacity: .4
 
-            Chord:
+            ChordItem:
                 id: 'previous-1'
                 chord: 'Dm'
                 opacity: .4
 
-            Chord:
+            ChordItem:
                 id: 'current'
                 chord: 'A'
 
-            Chord:
+            ChordItem:
                 id: 'future-1'
                 chord: 'E'
                 opacity: .4
 
-            Chord:
+            ChordItem:
                 id: 'future-2'
                 chord: 'D'
                 opacity: .4
+
+<ChordItem@Chord>:
+    color: (.95, .95, .95, 1)

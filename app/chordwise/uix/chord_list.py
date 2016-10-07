@@ -44,11 +44,13 @@ class ChordThumb(ButtonBehavior, BorderBehavior, Chord):
         (self.activate if self.active else self.deactivate)()
 
     def activate(self):
-        self.borders = (5, 'solid', (0, 0, 0, 1))
+        self.border = (5, 'solid', (0, .6, .9, 1))
+        self.color = (.9, .9, .9, 1)
         print('activate()')
 
     def deactivate(self):
-        self.borders = (0, 'solid', (0, 0, 0, 1))
+        self.border = (1, 'solid', (0, 0, 0, 0))
+        self.color = (1, 1, 1, 1)
         print('deactivate()')
 
 
