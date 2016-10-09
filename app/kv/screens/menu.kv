@@ -11,6 +11,7 @@
         Image:
             id: logo
             source: asset('img/chordwise.png')
+            size_hint_y: 2
 
         MenuButton:
             icon: asset('img/nav/chord.png')
@@ -22,10 +23,10 @@
             text: 'Practice'
             on_release: app.route = '/practice'
 
-        MenuButton:
-            icon: asset('img/nav/settings.png')
-            text: 'Settings'
-            on_release: app.route = '/settings'
+        #MenuButton:
+        #    icon: asset('img/nav/settings.png')
+        #    text: 'Settings'
+        #    on_release: app.route = '/settings'
 
 
 <MenuButton>:

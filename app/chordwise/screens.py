@@ -8,6 +8,10 @@ class MenuScreen(Screen):
     pass
 
 
+class SettingsScreen(Screen):
+    pass
+
+
 class ChordListScreen(Screen):
     pass
 

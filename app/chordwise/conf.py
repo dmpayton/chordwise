@@ -1,3 +1,4 @@
+import json
 import os
 
 # Directories
@@ -5,6 +6,7 @@ APP_DIR = os.sep.join(os.path.abspath(__file__).split(os.sep)[:-2])
 ASSETS_DIR = os.path.join(APP_DIR, 'assets')
 KV_DIR = os.path.join(APP_DIR, 'kv')
 
+# Fonts
 FONTS = {
     'FreeSans': {
         'fn_regular': 'fonts/freefont/FreeSans.ttf',
@@ -31,3 +33,36 @@ FONTS = {
         'fn_bolditalic': 'fonts/roboto/Roboto-Italic.ttf'
     },
 }
+
+# Settings
+SETTINGS = [
+    {
+        'type': 'title',
+        'title': 'Settings',
+    },
+    {
+        'type': 'numeric',
+        'title': 'BPM',
+        'desc': 'Beats Per Minute',
+        'section': 'chordwise',
+        'key': 'bpm',
+    },
+    {
+        'type': 'options',
+        'title': 'Time Signature',
+        'desc': 'Time signature',
+        'section': 'chordwise',
+        'key': 'time_signature',
+        'options': ['1/4', '2/4', '3/4', '4/4', '5/4', '6/8', '7/8', '8/8']
+    },
+    {
+        'type': 'options',
+        'title': 'Chords',
+        'desc': 'Chords',
+        'section': 'chordwise',
+        'key': 'chords',
+        'options': []
+    }
+]
+
+print(SETTINGS)

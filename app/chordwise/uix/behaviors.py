@@ -70,6 +70,9 @@ class BorderBehavior(Widget):
         origin_x = self.x + width
         origin_y = self.y + width
 
+        # origin_w = self.norm_image_size[0]
+        # origin_h = self.norm_image_size[1]
+
         self._border.points = [
             # bottom left
             origin_x,

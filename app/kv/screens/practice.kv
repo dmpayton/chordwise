@@ -1,4 +1,4 @@
-#: import Chord chordwise.uix.chord.Chord
+#: import Chord chordwise.uix.chord.ChordImage
 #: import asset chordwise.utils.asset
 
 <PracticeScreen>:
@@ -9,7 +9,7 @@
             orientation: 'vertical'
             padding: '20dp'
 
-            Chord:
+            ChordImage:
                 id: 'current'
                 width: self.parent.width
                 chord: 'A'
@@ -18,7 +18,7 @@
                 halign: 'right'
                 height: '60dp'
                 size_hint_y: None
-                text: '4/4, 60BPM'
+                text: '4/4 @ 60 bpm'
                 text_size: self.size
 
         BoxLayout:
@@ -67,5 +67,5 @@
                 chord: 'D'
                 opacity: .4
 
-<ChordItem@Chord>:
+<ChordItem@ChordImage>:
     color: (.95, .95, .95, 1)

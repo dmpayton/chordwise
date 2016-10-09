@@ -18,4 +18,3 @@ def random_cycle(iterable):
             if next == previous:
                 continue
             yield next
-            break

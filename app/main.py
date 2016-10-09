@@ -1,3 +1,4 @@
+import kivy
 import os
 
 import kivy
@@ -17,6 +18,7 @@ from kivy.core.text import LabelBase
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.garden.router import AppRouter
+from kivy.uix.settings import SettingsWithNoMenu
 
 import chordwise.conf
 import chordwise.router
@@ -35,8 +37,24 @@ for root, dirs, files in os.walk(chordwise.conf.KV_DIR):
 
 class ChordwiseApp(AppRouter):
     def build(self):
+        self.settings_cls = SettingsWithNoMenu
+        self.use_kivy_settings = False
+
         self.root = chordwise.router.MainRouter()
         self.route = '/'
+
+    def build_config(self, config):
+        config.setdefaults('chordwise', {
+            'bpm': 60,
+            'time_signature': '4/4',
+        })
+
+    def build_settings(self, settings):
+        settings.add_json_panel(
+            title='Settings',
+            config=self.config,
+            data=json.dumps(chordwise.conf.SETTINGS)
+        )
 
 if __name__ == '__main__':
     Window.clearcolor = (1, 1, 1, 1)
