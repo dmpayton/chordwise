@@ -10,19 +10,18 @@
             padding: '20dp'
 
             ChordImage:
-                id: 'current'
+                id: main-chord
                 width: self.parent.width
-                chord: 'A'
             Label:
                 color: (.2, .2, .2, 1)
                 halign: 'right'
                 height: '60dp'
                 size_hint_y: None
-                text: '4/4 @ 60 bpm'
+                text: '4/4 @ {} bpm'.format(root.bpm)
                 text_size: self.size
 
         BoxLayout:
-            id: 'playlist'
+            id: playlist
             orientation: 'horizontal'
             size_hint_y: .2
             padding: '20dp'
@@ -44,27 +43,22 @@
                     size: self.width, 1
 
             ChordItem:
-                id: 'previous-2'
-                chord: 'A'
+                id: previous-2
                 opacity: .4
 
             ChordItem:
-                id: 'previous-1'
-                chord: 'Dm'
+                id: previous-1
                 opacity: .4
 
             ChordItem:
-                id: 'current'
-                chord: 'A'
+                id: current
 
             ChordItem:
-                id: 'future-1'
-                chord: 'E'
+                id: future-1
                 opacity: .4
 
             ChordItem:
-                id: 'future-2'
-                chord: 'D'
+                id: future-2
                 opacity: .4
 
 <ChordItem@ChordImage>:

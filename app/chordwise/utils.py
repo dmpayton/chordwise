@@ -9,12 +9,12 @@ def asset(path):
 
 
 def random_cycle(iterable):
-    iterable = list(iterable)
-    previous, next = (None, None)
+    next = None
     while True:
         previous = next
         while True:
             next = random.choice(iterable)
             if next == previous:
                 continue
-            yield next
+            break
+        yield next

@@ -18,6 +18,7 @@ from kivy.core.text import LabelBase
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.garden.router import AppRouter
+from kivy.storage.jsonstore import JsonStore
 from kivy.uix.settings import SettingsWithNoMenu
 
 import chordwise.conf
@@ -36,10 +37,12 @@ for root, dirs, files in os.walk(chordwise.conf.KV_DIR):
 
 
 class ChordwiseApp(AppRouter):
-    def build(self):
-        self.settings_cls = SettingsWithNoMenu
-        self.use_kivy_settings = False
+    settings_cls = SettingsWithNoMenu
+    use_kivy_settings = False
 
+    store = JsonStore('../chordwise-settings.json')
+
+    def build(self):
         self.root = chordwise.router.MainRouter()
         self.route = '/'
 
@@ -47,6 +50,7 @@ class ChordwiseApp(AppRouter):
         config.setdefaults('chordwise', {
             'bpm': 60,
             'time_signature': '4/4',
+            'chords': ['C', 'A', 'G', 'E', 'D']
         })
 
     def build_settings(self, settings):
