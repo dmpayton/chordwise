@@ -3,6 +3,7 @@ from collections import OrderedDict
 
 from kivy import properties
 from kivy.app import App
+from kivy.graphics import Rectangle, Color
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
@@ -13,11 +14,17 @@ from kivy.uix.stacklayout import StackLayout
 from .behaviors import BorderBehavior
 from .chord import ChordImage
 from chordwise.chord import chorddb
+from chordwise.store import chord_store
 from chordwise.utils import asset
 
 
 class ChordThumb(ButtonBehavior, BorderBehavior, ChordImage):
     active = properties.BooleanProperty(False)
+
+    def __init__(self, **kwargs):
+        super(ChordThumb, self).__init__(**kwargs)
+        if self.chord in chord_store.chords:
+            self.active = True
 
     def on_release(self):
         self.active = not self.active
@@ -29,10 +36,17 @@ class ChordThumb(ButtonBehavior, BorderBehavior, ChordImage):
         (self.activate if self.active else self.deactivate)()
 
     def activate(self):
+        if self.chord not in chord_store.chords:
+            chord_store.add(self.chord)
+
         self.border = (5, 'solid', (0, .6, .9, 1))
         self.color = (.9, .9, .9, 1)
 
+
     def deactivate(self):
+        if self.chord in chord_store.chords:
+            chord_store.remove(self.chord)
+
         self.border = (1, 'solid', (0, 0, 0, 0))
         self.color = (1, 1, 1, 1)
 

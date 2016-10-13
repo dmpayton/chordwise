@@ -9,15 +9,16 @@
             orientation: 'vertical'
             padding: '20dp'
 
-            ChordImage:
+            MainChordImage:
                 id: main-chord
                 width: self.parent.width
+                on_release: root.toggle()
             Label:
                 color: (.2, .2, .2, 1)
                 halign: 'right'
                 height: '60dp'
                 size_hint_y: None
-                text: '4/4 @ {} bpm'.format(root.bpm)
+                text: '{time} @ {bpm} bpm'.format(time=root.time, bpm=root.bpm)
                 text_size: self.size
 
         BoxLayout:
@@ -60,6 +61,8 @@
             ChordItem:
                 id: future-2
                 opacity: .4
+
+<MainChordImage@ChordImage+ButtonBehavior>:
 
 <ChordItem@ChordImage>:
     color: (.95, .95, .95, 1)
